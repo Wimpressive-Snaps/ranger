@@ -1,0 +1,35 @@
+name: ranger
+base: core18
+version: 'git'
+summary: A VIM-inspired filemanager for the console
+description: >
+  ranger is a console file manager with VI key bindings. It provides a
+  minimalistic and nice curses interface with a view on the directory
+  hierarchy. It ships with rifle, a file launcher that is good at
+  automatically finding out which program to use for what file type.
+
+grade: stable
+confinement: strict
+
+parts:
+  ranger:
+    plugin: python
+    source: .
+    stage-packages:
+      - caca-utils
+      - less
+      - libgpm2
+      - mediainfo
+      - odt2txt
+      - poppler-utils
+      - python3-chardet
+      - python-pygments
+      - unrar
+      - w3m-img
+
+apps:
+  ranger:
+    command: python3 $SNAP/bin/ranger
+    environment:
+      LC_ALL: C.UTF-8
+      PYTHONPATH: $PYTHONPATH:$SNAP/lib/python3.6/site-packages
